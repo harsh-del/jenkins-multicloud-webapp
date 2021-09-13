@@ -11,3 +11,7 @@
       #src: "{{ ec2['instances'][0]['public_ip_address'] }}"
       dest: "./roles/k8s_master1/vars/main.yml"
 
+  - template:
+      src: "./master_ip.txt"
+      #src: "{{ ec2['instances'][0]['public_ip_address'] }}"
+      dest: "./roles/web/vars/main.yml"
