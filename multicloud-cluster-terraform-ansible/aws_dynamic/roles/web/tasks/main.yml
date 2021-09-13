@@ -1,0 +1,85 @@
+---
+# tasks file for web
+- name: Installing httpd service
+  package:
+     name: "httpd"
+     state: present
+
+- name: "Start httpd service"
+  service:
+     name: "httpd"
+     state: started
+
+- name: "Install git software"
+  package:
+     name: "git"
+     state: present
+
+- name: "Download k8s webapp code"
+  shell: "git clone https://github.com/harsh-del/kube-app.git"
+  ignore_errors: yes
+
+- name: "Change mode of back file"
+  shell: "chmod +x kube-app/back.py"
+
+- name: "Change mode of aws file "
+  shell: "chmod +x kube-app/file.py"
+
+- name: "Moving back file"
+  shell: "mv kube-app/back.py /var/www/cgi-bin/"
+
+- name: "Moving aws file"
+  shell: "mv kube-app/file.py /var/www/cgi-bin/"
+
+- name: "Moving html folder  files"
+  shell: "mv kube-app/* /var/www/html/"
+
+- name: "Change deploy ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/deploy.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change env ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/env.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change index ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/index.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change main ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/main.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change pod ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/pod.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change scale ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/scale.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Change service ip"
+  lineinfile:
+       path: "/var/www/html/assets/js/service.js"
+       regexp: "^ip ="
+       line: "ip = '{{ ip }}'"
+
+- name: "Giving sudo powers to apache"
+  lineinfile:
+       path: "/etc/sudoers"
+       #regexp: "^ip ="
+       insertafter: "root       ALL=(ALL)         ALL"
+       line: "apache  ALL=(ALL)  NOPASSWD: ALL"
+
