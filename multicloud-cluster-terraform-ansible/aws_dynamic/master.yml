@@ -1,0 +1,7 @@
+- hosts: localhost
+  tasks:
+  - shell: chmod 400 ./aws_invent/K8sKy.pem
+
+- hosts: tag_Name_master
+  roles:
+  - role: "k8s_master1"

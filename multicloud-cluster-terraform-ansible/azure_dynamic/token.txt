@@ -1,0 +1,1 @@
+kubeadm join 13.127.119.103:6443 --token 1ku8p6.nar4acqvtv3g2xvj --discovery-token-ca-cert-hash sha256:14e75d84f7209d887e493c75b76fde4becdbaa52639612014c756171ca5e499c 

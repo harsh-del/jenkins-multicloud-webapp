@@ -1,0 +1,1 @@
+kubeadm join 13.233.223.227:6443 --token y8hxle.gs0w7c93m9ay4dfo --discovery-token-ca-cert-hash sha256:62c34b1b7d2bd43fccf9ee5ccef8803bc3ed7dc4894560d5bcba736f11d6c14a 

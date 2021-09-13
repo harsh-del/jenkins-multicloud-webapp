@@ -1,0 +1,2 @@
+ip: {{ ec2['instances'][0]['public_ip_address'] }}
+pod_network_cidr: 10.240.0.0/16
