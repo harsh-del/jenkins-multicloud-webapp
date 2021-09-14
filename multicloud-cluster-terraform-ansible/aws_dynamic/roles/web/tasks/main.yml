@@ -1,19 +1,16 @@
 ---
 # tasks file for web
-- name: Installing httpd service
-  package:
-     name: "httpd"
-     state: present
 
+- name: "Installing httpd service"
+  shell: "yum install httpd -y"
+   
 - name: "Start httpd service"
   service:
      name: "httpd"
      state: started
 
 - name: "Install git software"
-  package:
-     name: "git"
-     state: present
+  shell: "yum install git -y"
 
 - name: "Download k8s webapp code"
   shell: "git clone https://github.com/harsh-del/kube-app.git"
@@ -30,6 +27,15 @@
 
 - name: "Moving aws file"
   shell: "mv kube-app/file.py /var/www/cgi-bin/"
+
+- name: "Installing dos2linux software"
+  shell: "yum install dos2unix -y"
+ 
+- name: "Converting back.py file"
+  shell: "dos2unix /var/www/cgi-bin/back.py"
+
+- name: "Converting file.py file"
+  shell: "dos2unix /var/www/cgi-bin/file.py"
 
 - name: "Moving html folder  files"
   shell: "mv kube-app/* /var/www/html/"
@@ -82,4 +88,5 @@
        #regexp: "^ip ="
        insertafter: "root       ALL=(ALL)         ALL"
        line: "apache  ALL=(ALL)  NOPASSWD: ALL"
+
 
