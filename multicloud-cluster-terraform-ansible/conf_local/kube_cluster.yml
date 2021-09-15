@@ -3,11 +3,8 @@
   tasks:
 
   - name: Go to the main folder and launch structure
-    command: ansible-playbook multi_cloud_infrastructure.yml
+    command: ansible-playbook multi_cloud_infrastructure.yml 
     
-  - name: Launch Kubernetes Web App
-    command: chdir=../aws_dynamic ansible-playbook webapp.yml  
-
   - name: Go to the aws folder and execute command
     command: chdir=../aws_dynamic ansible-playbook ip.yml
 
@@ -16,5 +13,8 @@
 
   - name: Go to the azure folder and execute command
     command: chdir=../azure_dynamic ansible-playbook slave.yml
+    
+  - name: Launch Kubernetes Web App
+    command: chdir=../aws_dynamic ansible-playbook webapp.yml 
 
 
